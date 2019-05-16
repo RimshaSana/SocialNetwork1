@@ -1,0 +1,325 @@
+@prefix : <http://www.semanticweb.org/hp/ontologies/2019/4/untitled-ontology-4#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.semanticweb.org/hp/ontologies/2019/4/untitled-ontology-4> .
+
+<http://www.semanticweb.org/hp/ontologies/2019/4/untitled-ontology-4> rdf:type owl:Ontology .
+
+
+#################################################################
+#
+#    Object Properties
+#
+#################################################################
+
+
+###  http://www.semanticweb.org/hp/ontologies/2019/4/untitled-ontology-4#CommentOn
+
+:CommentOn rdf:type owl:ObjectProperty ;
+           
+           rdfs:domain :Person ;
+           
+           rdfs:range :Post ;
+           
+           rdfs:subPropertyOf :RespondTo .
+
+
+
+###  http://www.semanticweb.org/hp/ontologies/2019/4/untitled-ontology-4#Expresses
+
+:Expresses rdf:type owl:ObjectProperty ;
+           
+           rdfs:domain :Person ;
+           
+           rdfs:range :Post ;
+           
+           rdfs:subPropertyOf :RespondTo .
+
+
+
+###  http://www.semanticweb.org/hp/ontologies/2019/4/untitled-ontology-4#FollowedBy
+
+:FollowedBy rdf:type owl:ObjectProperty .
+
+
+
+###  http://www.semanticweb.org/hp/ontologies/2019/4/untitled-ontology-4#Follows
+
+:Follows rdf:type owl:ObjectProperty ;
+         
+         owl:inverseOf :FollowedBy ;
+         
+         rdfs:domain :Person ;
+         
+         rdfs:range [ rdf:type owl:Class ;
+                      owl:unionOf ( :Group
+                                    :Person
+                                    :Post
+                                  )
+                    ] .
+
+
+
+###  http://www.semanticweb.org/hp/ontologies/2019/4/untitled-ontology-4#FriendOf
+
+:FriendOf rdf:type owl:ObjectProperty ,
+                   owl:ReflexiveProperty ,
+                   owl:SymmetricProperty ,
+                   owl:TransitiveProperty ;
+          
+          rdfs:range :Person ;
+          
+          rdfs:domain :Person .
+
+
+
+###  http://www.semanticweb.org/hp/ontologies/2019/4/untitled-ontology-4#HasOwner
+
+:HasOwner rdf:type owl:ObjectProperty ;
+          
+          rdfs:domain :Community ;
+          
+          rdfs:range :Person .
+
+
+
+###  http://www.semanticweb.org/hp/ontologies/2019/4/untitled-ontology-4#Likes
+
+:Likes rdf:type owl:ObjectProperty ;
+       
+       rdfs:domain :Person ;
+       
+       rdfs:range :Post ;
+       
+       rdfs:subPropertyOf :RespondTo .
+
+
+
+###  http://www.semanticweb.org/hp/ontologies/2019/4/untitled-ontology-4#Posts
+
+:Posts rdf:type owl:ObjectProperty ;
+       
+       rdfs:domain :Person ;
+       
+       rdfs:range :Post .
+
+
+
+###  http://www.semanticweb.org/hp/ontologies/2019/4/untitled-ontology-4#RespondTo
+
+:RespondTo rdf:type owl:ObjectProperty ;
+           
+           rdfs:domain :Person ;
+           
+           rdfs:range :Post .
+
+
+
+###  http://www.semanticweb.org/hp/ontologies/2019/4/untitled-ontology-4#Share
+
+:Share rdf:type owl:ObjectProperty ;
+       
+       rdfs:domain :Person ;
+       
+       rdfs:range :Post ;
+       
+       rdfs:subPropertyOf :RespondTo .
+
+
+
+###  http://www.semanticweb.org/hp/ontologies/2019/4/untitled-ontology-4#SpouseOf
+
+:SpouseOf rdf:type owl:FunctionalProperty ,
+                   owl:ObjectProperty ,
+                   owl:SymmetricProperty ;
+          
+          rdfs:range :Person ;
+          
+          rdfs:domain :Person .
+
+
+
+
+
+#################################################################
+#
+#    Data properties
+#
+#################################################################
+
+
+###  http://www.semanticweb.org/hp/ontologies/2019/4/untitled-ontology-4#hasname
+
+:hasname rdf:type owl:DatatypeProperty ;
+         
+         rdfs:domain :Person ;
+         
+         rdfs:range xsd:string .
+
+
+
+
+
+#################################################################
+#
+#    Classes
+#
+#################################################################
+
+
+###  http://www.semanticweb.org/hp/ontologies/2019/4/untitled-ontology-4#Album
+
+:Album rdf:type owl:Class ;
+       
+       rdfs:subClassOf :Post .
+
+
+
+###  http://www.semanticweb.org/hp/ontologies/2019/4/untitled-ontology-4#Community
+
+:Community rdf:type owl:Class ;
+           
+           owl:equivalentClass :Group ;
+           
+           rdfs:subClassOf [ rdf:type owl:Restriction ;
+                             owl:onProperty :HasOwner ;
+                             owl:onClass :Person ;
+                             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger
+                           ] .
+
+
+
+###  http://www.semanticweb.org/hp/ontologies/2019/4/untitled-ontology-4#Friend
+
+:Friend rdf:type owl:Class ;
+        
+        owl:equivalentClass [ rdf:type owl:Restriction ;
+                              owl:onProperty :FriendOf ;
+                              owl:someValuesFrom :Person
+                            ] ;
+        
+        rdfs:subClassOf :Person .
+
+
+
+###  http://www.semanticweb.org/hp/ontologies/2019/4/untitled-ontology-4#Group
+
+:Group rdf:type owl:Class .
+
+
+
+###  http://www.semanticweb.org/hp/ontologies/2019/4/untitled-ontology-4#Location
+
+:Location rdf:type owl:Class .
+
+
+
+###  http://www.semanticweb.org/hp/ontologies/2019/4/untitled-ontology-4#Message
+
+:Message rdf:type owl:Class ;
+         
+         rdfs:subClassOf :Post .
+
+
+
+###  http://www.semanticweb.org/hp/ontologies/2019/4/untitled-ontology-4#Person
+
+:Person rdf:type owl:Class .
+
+
+
+###  http://www.semanticweb.org/hp/ontologies/2019/4/untitled-ontology-4#Photo
+
+:Photo rdf:type owl:Class ;
+       
+       rdfs:subClassOf :Post .
+
+
+
+###  http://www.semanticweb.org/hp/ontologies/2019/4/untitled-ontology-4#Post
+
+:Post rdf:type owl:Class .
+
+
+
+###  http://www.semanticweb.org/hp/ontologies/2019/4/untitled-ontology-4#Video
+
+:Video rdf:type owl:Class ;
+       
+       rdfs:subClassOf :Post .
+
+
+
+
+
+#################################################################
+#
+#    Individuals
+#
+#################################################################
+
+
+###  http://www.semanticweb.org/hp/ontologies/2019/4/untitled-ontology-4#Alice
+
+:Alice rdf:type :Person ,
+                owl:NamedIndividual ;
+       
+       :Likes :ProfilePic .
+
+
+
+###  http://www.semanticweb.org/hp/ontologies/2019/4/untitled-ontology-4#Bob
+
+:Bob rdf:type :Person ,
+              owl:NamedIndividual ;
+     
+     :SpouseOf :Alice ;
+     
+     owl:sameAs :John .
+
+
+
+###  http://www.semanticweb.org/hp/ontologies/2019/4/untitled-ontology-4#John
+
+:John rdf:type :Person ,
+               owl:NamedIndividual ;
+      
+      :SpouseOf :Alice ;
+      
+      :Likes :ProfilePic .
+
+
+
+###  http://www.semanticweb.org/hp/ontologies/2019/4/untitled-ontology-4#Mike
+
+:Mike rdf:type :Person ,
+               owl:NamedIndividual ;
+      
+      :FriendOf :John ;
+      
+      :CommentOn :ProfilePic .
+
+
+
+###  http://www.semanticweb.org/hp/ontologies/2019/4/untitled-ontology-4#ProfilePic
+
+:ProfilePic rdf:type :Photo ,
+                     owl:NamedIndividual .
+
+
+
+###  http://www.semanticweb.org/hp/ontologies/2019/4/untitled-ontology-4#Sementic_web
+
+:Sementic_web rdf:type :Community ,
+                       owl:NamedIndividual ;
+              
+              :HasOwner :Alice .
+
+
+
+
+###  Generated by the OWL API (version 3.4.2) http://owlapi.sourceforge.net
+
